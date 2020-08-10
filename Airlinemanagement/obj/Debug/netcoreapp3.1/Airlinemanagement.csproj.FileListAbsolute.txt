@@ -1,0 +1,13 @@
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.AssemblyInfoInputs.cache
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.AssemblyInfo.cs
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.csproj.CoreCompileInputs.cache
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.exe
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.deps.json
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.runtimeconfig.json
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.runtimeconfig.dev.json
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.dll
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\bin\Debug\netcoreapp3.1\Airlinemanagement.pdb
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.dll
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.pdb
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.genruntimeconfig.cache
+C:\Users\nurudeen\source\repos\Airlinemanagement\Airlinemanagement\obj\Debug\netcoreapp3.1\Airlinemanagement.csprojAssemblyReference.cache
