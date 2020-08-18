@@ -1,16 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Airlinemanagement
 {
     class Passengermanager
     {
-        static List<Passenger> passengers = new List<Passenger>();
-        Bookingmanager bookingmanager = new Bookingmanager();
+        //static List<Passenger> passengers = new List<Passenger>();
+        static List<Passenger> passengers;
+        //Bookingmanager bookingmanager = new Bookingmanager();
+        Bookingmanager bookingmanager;
+        public Passengermanager(Bookingmanager bookingmanager)
+        {
+            this.bookingmanager = bookingmanager;
+            passengers = new List<Passenger>();
+
+            try
+            {
+                var lines = File.ReadAllLines("passenger.txt");
+                foreach (var line in lines)
+                {
+                    var passenger = Passenger.Parse(line);
+                    passengers.Add(passenger);
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
         public void show(Passenger a)
         {
-            Console.WriteLine($"{a.booking.bookingNumber} {a.name} {a.address} {a.phoneNumber} {a.email} {a.gender} {a.dateOfBirth:dd:MM:yyyy}");
+            Console.WriteLine($"{a.nameOfPassenger} {a.bookingNum} {a.address} {a.phoneNumber} {a.email} {a.gender} {a.dateOfBirth.ToShortDateString()}");
         }
         public void list()
         {
@@ -19,21 +42,24 @@ namespace Airlinemanagement
                 show(a);
             }
         }
-        public void create(int bookingno, string name, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public void create(string nameOfPassenger, int bookingNum, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            Booking booking = bookingmanager.find(bookingno);
+            Booking booking = bookingmanager.find(bookingNum);
             if (booking == null)
             {
-                Console.WriteLine($"{bookingno}");
+                Console.WriteLine($"{bookingNum}");
                 return;
             }
-            Passenger a = new Passenger(booking, name, address, phoneNumber, email, gender, dateOfBirth);
+            Passenger a = new Passenger(nameOfPassenger, bookingNum, address, phoneNumber, email, gender, dateOfBirth);
             passengers.Add(a);
+            TextWriter writer = new StreamWriter("passenger.txt", true);
+            writer.WriteLine(a.ToString());
+            writer.Close();
         }
-        public void update(int bookingno, string name, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public void update(string nameOfPassenger, int bookingNum, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            var a = passengers.Find(p => p.name == name);
-            var booking = bookingmanager.find(bookingno);
+            var a = passengers.Find(p => p.nameOfPassenger == nameOfPassenger);
+            var booking = bookingmanager.find(bookingNum);
             if (booking == null)
             {
                 Console.WriteLine();
@@ -43,16 +69,30 @@ namespace Airlinemanagement
             a.phoneNumber = phoneNumber;
             a.email = email;
             a.gender = gender;
-            a.dateOfBirth= dateOfBirth;
+            a.dateOfBirth = dateOfBirth;
+            RefreshFile();
         }
-        public void remove(string name, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+
+        private void RefreshFile()
         {
-            var a = passengers.Find(p => p.name == name);
+            TextWriter writer = new StreamWriter("passenger.txt");
+            foreach (var passenger in passengers)
+            {
+                writer.WriteLine(passenger);
+            }
+            writer.Flush();
+            writer.Close();
+        }
+    
+        public void remove(string nameOfPassenger)
+        {
+            var a = passengers.Find(p => p.nameOfPassenger == nameOfPassenger);
             passengers.Remove(a);
+            RefreshFile();
         }
-        public Passenger find(string name)
+        public Passenger find(string nameOfPassenger)
         {
-            return passengers.Find(p => p.name == name);
+            return passengers.Find(p => p.nameOfPassenger == nameOfPassenger);
         }
     }
 }

@@ -1,16 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Airlinemanagement
 {
     public class Flightmanager
     {
-        static List<Flight> flights = new List<Flight>();
-        Aircraftmanager aircraftmanager = new Aircraftmanager(); 
+        public List<Flight> flights;
+        /*= new List<Flight>();
+        Aircraftmanager aircraftmanager = new Aircraftmanager();*/
+        Aircraftmanager aircraftmanager;
+        public Flightmanager(Aircraftmanager aircraftmanager)
+        {
+            this.aircraftmanager = aircraftmanager;
+            flights = new List<Flight>();
+
+            try
+            {
+                var lines = File.ReadAllLines("flight.txt");
+                foreach (var line in lines)
+                {
+                    
+                    var flight = Flight.Parse(line);
+                    flights.Add(flight);
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         public void show(Flight a)
         {
-            Console.WriteLine($"{a.flightNumber} {a.aircraft.registrationNumber} {a.takeOfairport} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.destination} {a.ticketPrice}");
+            //Console.WriteLine($"{a.aircraft} {a.flightNumber} {a.takeOfPoint} {a.destination} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.flightPrice}");
+            Console.WriteLine($"{a.aircraftNum} {a.flightNumber} {a.takeOfPoint} {a.destination} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.flightPrice}");
         }
         public void list()
         {
@@ -20,37 +44,53 @@ namespace Airlinemanagement
             }
         }
 
-        public void create(int flighNumber, string aircraftno, string takeOfairport, DateTime takeOfTime, DateTime landingTime, string destination, decimal ticketPrice)
+        public void create(string aircraftNum, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
         {
-            Aircraft aircraft= aircraftmanager.find(aircraftno);
+            Aircraft aircraft = aircraftmanager.find(aircraftNum);
             if (aircraft == null)
             {
-                Console.WriteLine($"{aircraftno}");
+                Console.WriteLine($"Aircraft with {aircraftNum} could not be found");
                 return;
             }
-            Flight a = new Flight(flighNumber, aircraft, takeOfairport, takeOfTime, landingTime, destination, ticketPrice);
+            Flight a = new Flight(aircraftNum, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, flightPrice);
             flights.Add(a);
+            TextWriter writer = new StreamWriter("flight.txt", true);
+            writer.WriteLine(a.ToString());
+            writer.Close();
         }
-        public void update(int flightNumber, string aircraftno, string takeOfairport, DateTime takeOfTime, DateTime landingTime, string destination, decimal ticketPrice)
+        public void update(string aircraftNum, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
         {
             var a = flights.Find(p => p.flightNumber == flightNumber);
-            var aircraft= aircraftmanager.find(aircraftno);
+            var aircraft = aircraftmanager.find(aircraftNum);
             if (aircraft == null)
             {
                 Console.WriteLine();
                 return;
             }
-            a.aircraft = aircraft;
-            a.takeOfairport = takeOfairport;
+            a.aircraftNum = aircraftNum;
+            a.takeOfPoint = takeOfPoint;
             a.takeOfTime = takeOfTime;
             a.landingTime = landingTime;
             a.destination = destination;
-            a.ticketPrice = ticketPrice;
+            a.flightPrice = flightPrice;
+            RefreshFile();
         }
-        public void remove(int flighNumber, string aircraft, string takeOfairport, DateTime takeOfTime, DateTime landingTime, string destination, decimal ticketPrice)
+
+        private void RefreshFile()
         {
-            var a = flights.Find(p => p.flightNumber == flighNumber);
+            TextWriter writer = new StreamWriter("flight.txt");
+            foreach (var flight in flights)
+            {
+                writer.WriteLine(flight);
+            }
+            writer.Flush();
+            writer.Close();
+        }
+        public void remove(int flightNumber)
+        {
+            var a = flights.Find(p => p.flightNumber == flightNumber);
             flights.Remove(a);
+            RefreshFile();
         }
         public Flight find(int flightNumber)
         {
@@ -59,7 +99,7 @@ namespace Airlinemanagement
 
         public Flight find(string destination, DateTime time)
         {
-           return  flights.Find(f => f.destination == destination && f.takeOfTime.TimeOfDay == time.TimeOfDay);
+            return flights.Find(f => f.destination == destination && f.takeOfTime.TimeOfDay == time.TimeOfDay);
         }
 
     }
