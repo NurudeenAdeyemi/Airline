@@ -34,7 +34,7 @@ namespace Airlinemanagement
         public void show(Flight a)
         {
             //Console.WriteLine($"{a.aircraft} {a.flightNumber} {a.takeOfPoint} {a.destination} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.flightPrice}");
-            Console.WriteLine($"{a.aircraftNum} {a.flightNumber} {a.takeOfPoint} {a.destination} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.flightPrice}");
+            Console.WriteLine($"{a.registrationNumber} {a.flightNumber} {a.takeOfPoint} {a.destination} {a.takeOfTime:HH:mm:ss} {a.landingTime:HH:mm:ss} {a.flightPrice}");
         }
         public void list()
         {
@@ -44,30 +44,30 @@ namespace Airlinemanagement
             }
         }
 
-        public void create(string aircraftNum, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
+        public void create(string registrationNumber, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
         {
-            Aircraft aircraft = aircraftmanager.find(aircraftNum);
+            Aircraft aircraft = aircraftmanager.find(registrationNumber);
             if (aircraft == null)
             {
-                Console.WriteLine($"Aircraft with {aircraftNum} could not be found");
+                Console.WriteLine($"Aircraft with {registrationNumber} could not be found");
                 return;
             }
-            Flight a = new Flight(aircraftNum, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, flightPrice);
+            Flight a = new Flight(registrationNumber, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, flightPrice);
             flights.Add(a);
             TextWriter writer = new StreamWriter("flight.txt", true);
             writer.WriteLine(a.ToString());
             writer.Close();
         }
-        public void update(string aircraftNum, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
+        public void update(string registrationNumber, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime, decimal flightPrice)
         {
             var a = flights.Find(p => p.flightNumber == flightNumber);
-            var aircraft = aircraftmanager.find(aircraftNum);
+            var aircraft = aircraftmanager.find(registrationNumber);
             if (aircraft == null)
             {
                 Console.WriteLine();
                 return;
             }
-            a.aircraftNum = aircraftNum;
+            a.registrationNumber = registrationNumber;
             a.takeOfPoint = takeOfPoint;
             a.takeOfTime = takeOfTime;
             a.landingTime = landingTime;

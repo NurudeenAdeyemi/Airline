@@ -199,7 +199,7 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the Aircraft Flight Number");
                 int flightNumber = int.Parse(Console.ReadLine());
                 Console.WriteLine("Enter the Aircraft");
-                string aircraftNum = Console.ReadLine();
+                string registrationNumber = Console.ReadLine();
                 Console.WriteLine("Enter the takeOfairport");
                 string takeOfPoint = Console.ReadLine();
                 Console.WriteLine("Enter the takeOfTime");
@@ -211,7 +211,7 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the Ticket price");
                 decimal ticketPrice = decimal.Parse(Console.ReadLine());
                 Console.ReadLine();
-                flightmanager.create(aircraftNum, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, ticketPrice);
+                flightmanager.create(registrationNumber, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, ticketPrice);
             }
             else if (action.Equals("3"))
             {
@@ -225,7 +225,7 @@ namespace Airlinemanagement
                 else
                 {
                     Console.WriteLine("Enter the Aircraft");
-                    string aircraftNum = Console.ReadLine();
+                    string registrationNumber = Console.ReadLine();
                     Console.WriteLine("Enter the takeOfairport");
                     string takeOfPoint = Console.ReadLine();
                     Console.WriteLine("Enter the takeOfTime");
@@ -237,7 +237,7 @@ namespace Airlinemanagement
                     Console.WriteLine("Enter the Ticket price");
                     decimal ticketPrice = decimal.Parse(Console.ReadLine());
                     Console.ReadLine();
-                    flightmanager.update(aircraftNum, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, ticketPrice);
+                    flightmanager.update(registrationNumber, flightNumber, takeOfPoint, destination, takeOfTime, landingTime, ticketPrice);
                 }
 
             }
@@ -296,7 +296,7 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the Booking Number");
                 int bookingNumber = int.Parse(Console.ReadLine());
                 Console.WriteLine("Enter the Flight Number");
-                int flightNum = int.Parse(Console.ReadLine());
+                int flightNumber = int.Parse(Console.ReadLine());
                 //Console.WriteLine("Enter the Passenger Name");
                 //string bookingPassenger = Console.ReadLine();
                 Console.WriteLine("Enter the Booking Date");
@@ -306,7 +306,7 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the Seat Number");
                 int seatNumber = int.Parse(Console.ReadLine());
                 Console.ReadLine();
-                bookingmanager.create(bookingNumber, flightNum, bookingDate, bookingType, seatNumber);
+                bookingmanager.create(bookingNumber, flightNumber, bookingDate, bookingType, seatNumber);
             }
             else if (action.Equals("3"))
             {
@@ -320,7 +320,7 @@ namespace Airlinemanagement
                 else
                 {
                     Console.WriteLine("Enter the Flight Number");
-                    int flightNum = int.Parse(Console.ReadLine());
+                    int flightNumber = int.Parse(Console.ReadLine());
                     //Console.WriteLine("Enter the Passenger Name");
                     //string bookingPassenger = Console.ReadLine();
                     Console.WriteLine("Enter the Booking Date");
@@ -330,7 +330,7 @@ namespace Airlinemanagement
                     Console.WriteLine("Enter the Seat Number");
                     int seatNumber = int.Parse(Console.ReadLine());
                     Console.ReadLine();
-                    bookingmanager.update(bookingNumber, flightNum, bookingDate, bookingType, seatNumber);
+                    bookingmanager.update(bookingNumber, flightNumber, bookingDate, bookingType, seatNumber);
                 }
             }
             else if (action.Equals("4"))
@@ -384,10 +384,10 @@ namespace Airlinemanagement
             }
             else if (action.Equals("2"))
             {
-                Console.WriteLine("Enter the Passenger Name");
-                string nameOfPassenger = Console.ReadLine();
+                Console.WriteLine("Enter the Name of the Passenger");
+                string name = Console.ReadLine();
                 Console.WriteLine("Enter the Booking Number");
-                int bookingNum = int.Parse(Console.ReadLine());
+                int bookingNumber = int.Parse(Console.ReadLine());
                 Console.WriteLine("Enter the Passenger Address");
                 string address = Console.ReadLine();
                 Console.WriteLine("Enter the Phone Number");
@@ -399,21 +399,21 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the date of birth");
                 DateTime dateOfBirth = DateTime.Parse(Console.ReadLine());
                 Console.ReadLine();
-                passengermanager.create(nameOfPassenger, bookingNum, address, phoneNumber, email, gender, dateOfBirth);
+                passengermanager.create(name, bookingNumber, address, phoneNumber, email, gender, dateOfBirth);
             }
             else if (action.Equals("3"))
             {
                 Console.WriteLine("Enter the Passenger Name");
-                string nameofPassenger = Console.ReadLine();
-                var passenger = passengermanager.find(nameofPassenger);
+                string name = Console.ReadLine();
+                var passenger = passengermanager.find(name);
                 if (passenger == null)
                 {
-                    Console.WriteLine($"There is no passenger with the name {nameofPassenger}");
+                    Console.WriteLine($"There is no passenger with the name {name}");
                 }
                 else
                 {
                     Console.WriteLine("Enter the Booking Number");
-                    int bookingNum = int.Parse(Console.ReadLine());
+                    int bookingNumber = int.Parse(Console.ReadLine());
                     Console.WriteLine("Enter the Passenger Address");
                     string address = Console.ReadLine();
                     Console.WriteLine("Enter the Phone Number");
@@ -425,31 +425,31 @@ namespace Airlinemanagement
                     Console.WriteLine("Enter the date of birth");
                     DateTime dateOfBirth = DateTime.Parse(Console.ReadLine());
                     Console.ReadLine();
-                    passengermanager.update(nameofPassenger, bookingNum, address, phoneNumber, email, gender, dateOfBirth);
+                    passengermanager.update(name, bookingNumber, address, phoneNumber, email, gender, dateOfBirth);
                 }
             }
             else if (action.Equals("4"))
             {
                 Console.WriteLine("Enter the Passenger Name");
-                string nameofPassenger = Console.ReadLine();
-                var passenger = passengermanager.find(nameofPassenger);
+                string name = Console.ReadLine();
+                var passenger = passengermanager.find(name);
                 if (passenger == null)
                 {
-                    Console.WriteLine($"There is no passenger with the name {nameofPassenger}");
+                    Console.WriteLine($"There is no passenger with the name {name}");
                 }
                 else
                 {
-                    passengermanager.remove(nameofPassenger);
+                    passengermanager.remove(name);
                 }
             }
             else if (action.Equals("5"))
             {
                 Console.WriteLine("Enter the Passenger Name");
-                string nameofPassenger = Console.ReadLine();
-                var passenger = passengermanager.find(nameofPassenger);
+                string name = Console.ReadLine();
+                var passenger = passengermanager.find(name);
                 if (passenger == null)
                 {
-                    Console.WriteLine($"There is no passenger with the name {nameofPassenger}");
+                    Console.WriteLine($"There is no passenger with the name {name}");
                 }
                 else
                 {

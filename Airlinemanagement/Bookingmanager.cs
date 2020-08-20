@@ -33,7 +33,7 @@ namespace Airlinemanagement
 
         public void show(Booking a)
         {
-            Console.WriteLine($"{a.bookingNumber} {a.flightNum} {a.bookingDate.ToShortDateString()} {a.bookingType} {a.seatNumber}");
+            Console.WriteLine($"{a.bookingNumber} {a.flightNumber} {a.bookingDate.ToShortDateString()} {a.bookingType} {a.seatNumber}");
         }
         public void list()
         {
@@ -42,24 +42,24 @@ namespace Airlinemanagement
                 show(a);
             }
         }
-        public void create(int bookingNumber, int flightNum, DateTime bookingDate, string bookingType, int seatNumber)
+        public void create(int bookingNumber, int flightNumber, DateTime bookingDate, string bookingType, int seatNumber)
         {
-            Flight flight = flightmanager.find(flightNum);
+            Flight flight = flightmanager.find(flightNumber);
             if (flight == null)
             {
-                Console.WriteLine($"{flightNum}");
+                Console.WriteLine($"{flightNumber}");
                 return;
             }
-            Booking a = new Booking(bookingNumber, flightNum, bookingDate, bookingType, seatNumber);
+            Booking a = new Booking(bookingNumber, flightNumber, bookingDate, bookingType, seatNumber);
             bookings.Add(a);
             TextWriter writer = new StreamWriter("booking.txt", true);
             writer.WriteLine(a.ToString());
             writer.Close();
         }
-        public void update(int bookingNumber, int flightNum, DateTime bookingDate, string bookingType, int seatNumber)
+        public void update(int bookingNumber, int flightNumber, DateTime bookingDate, string bookingType, int seatNumber)
         {
             var a = bookings.Find(p => p.bookingNumber == bookingNumber);
-            var flight = flightmanager.find(flightNum);
+            var flight = flightmanager.find(flightNumber);
             if (flight == null)
             {
                 Console.WriteLine();

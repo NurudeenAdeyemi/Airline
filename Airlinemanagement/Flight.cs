@@ -7,16 +7,16 @@ namespace Airlinemanagement
     public class Flight
     {
         public int flightNumber;
-        public string aircraftNum;
+        public string registrationNumber;
         public string takeOfPoint;
         public DateTime takeOfTime;
         public DateTime landingTime;
         public string destination;
         public decimal flightPrice;
-        public Flight(string aircraftNum, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime,  decimal flightPrice)
+        public Flight(string registrationNumber, int flightNumber, string takeOfPoint, string destination, DateTime takeOfTime, DateTime landingTime,  decimal flightPrice)
         {
             this.flightNumber = flightNumber;
-            this.aircraftNum = aircraftNum;
+            this.registrationNumber = registrationNumber;
             this.takeOfPoint = takeOfPoint;
             this.takeOfTime = takeOfTime;
             this.landingTime = landingTime;
@@ -37,7 +37,7 @@ namespace Airlinemanagement
 
         public override string ToString()
         {
-            return $"{aircraftNum}\t{flightNumber}\t{takeOfPoint}\t{destination}\t{takeOfTime:HH:mm:ss}\t{landingTime:HH:mm:ss}\t{flightPrice}";
+            return $"{registrationNumber}\t{flightNumber}\t{takeOfPoint}\t{destination}\t{takeOfTime:HH:mm:ss}\t{landingTime:HH:mm:ss}\t{flightPrice}";
         }
     }
 }
