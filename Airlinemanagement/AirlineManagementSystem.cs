@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -7,12 +7,13 @@ using System.IO;
 
 namespace Airlinemanagement
 {
-    public class AirlineManagementSystem
+   public class AirlineManagementSystem
     {
-        static Aircraftmanager aircraftmanager = new Aircraftmanager();
-        static Flightmanager flightmanager = new Flightmanager(aircraftmanager);
-        static Bookingmanager bookingmanager = new Bookingmanager(flightmanager);
-        static Passengermanager passengermanager = new Passengermanager(bookingmanager);
+        /*static DBAircraftManager aircraftManager = new DBAircraftManager();
+        static DBFlightManager flightmanager = new DBFlightManager(aircraftmanager);
+        static DBBookingManager bookingmanager = new DBBookingManager(flightmanager);
+        static DBPassengerManager passengermanager = new DBPassengerManager(bookingmanager);
+
         public static void main()
         {
             Boolean flag = true;
@@ -91,7 +92,7 @@ namespace Airlinemanagement
             }
             else if (action.Equals("1"))
             {
-                aircraftmanager.list();
+                aircraftManager.display();
             }
             else if (action.Equals("2"))
             //try
@@ -107,7 +108,7 @@ namespace Airlinemanagement
                 Console.WriteLine("Enter the Aircraft capacity");
                 int capacity = int.Parse(Console.ReadLine());
                 Console.ReadLine();
-                aircraftmanager.create(name, type, capacity, registrationNumber);
+                aircraftManager.create(name, type, capacity, registrationNumber);
             }
             //}
             // catch (Exception e)
@@ -458,4 +459,4 @@ namespace Airlinemanagement
             }
         }
     }
-}
+}*/
